@@ -56,6 +56,8 @@ router.post('/', (req, res)=>{
 
 // PUT route
 router.put('/', (req, res) => {
+    console.log('in put route', req.body);
+    
     const updatedKoala = req.body;
     // pass the updatedGame into mongo
     Koala.findOneAndUpdate({_id: updatedKoala._id}, updatedKoala).then((updatedKoala) => {
