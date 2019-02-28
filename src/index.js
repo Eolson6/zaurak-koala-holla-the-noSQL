@@ -19,28 +19,36 @@ function* addNew(action){
     }
 }
 
-const employees = (state = [], action) => {
-    if (action.type === 'SET_EMPLOYEES'){
+function* rootSaga(){
+    yield takeEvery('GET_KOALAS', getKoalas)
+
+}
+function* getKoalas() {
+    try{
+        const serverResponse = yield axios.get('/api/koala');
+        const nextAction = {type: 'SET_KOALAS', payload: serverResponse.data}
+        yield put(nextAction)
+    }catch(error){
+        console.log('in getKoalas error', error);
+        
+    }
+}
+const koalas = (state = [], action) => {
+    if (action.type === 'SET_KOALAS'){
         return action.payload
     }
     return state;
 }
 
-
-
-
-
-
-
-
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
     combineReducers({
-        employees,
+        koalas,
     }),
     applyMiddleware(sagaMiddleware, logger),
 
 );
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('react-root'));
