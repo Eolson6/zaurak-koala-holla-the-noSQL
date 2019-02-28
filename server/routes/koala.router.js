@@ -8,7 +8,7 @@ const koalaSchema = new Schema({
     name: {type: String, required: true},
     gender: {type: String, required: true},
     age: {type: Number, required: true},
-    ready_to_transfer: { type: Boolean, default: false , required: true},
+    ready_to_transfer: { type: Boolean, default: false},
     notes: {type: String, required: false}
 });
 
@@ -43,6 +43,16 @@ router.get('/', (req,res)=> {
 
 // POST route
 
+router.post('/', (req, res)=>{
+    console.log('router.post',req.body);
+    const koalaToAdd= req.body;
+    Koala.create(koalaToAdd).then( (createdKoala) => {
+        res.sendStatus(201);
+    }).catch((error)=>{
+        console.log('there was a problem', error);
+        res.sendStatus(500);   
+    })
+});
 
 // PUT route
 
