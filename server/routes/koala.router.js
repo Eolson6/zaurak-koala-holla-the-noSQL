@@ -32,6 +32,15 @@ const Koala = mongoose.model('koala', koalaSchema);
 //     ])
 // });
 
+router.get('/', (req,res)=> {
+    Koala.find({}).then(results => {
+        res.send(results);
+    }).catch(error => {
+        console.log('there was a problem', error);
+        res.sendStatus(500);
+    })
+});
+
 // POST route
 
 
