@@ -55,7 +55,16 @@ router.post('/', (req, res)=>{
 });
 
 // PUT route
-
+router.put('/', (req, res) => {
+    const updatedKoala = req.body;
+    // pass the updatedGame into mongo
+    Koala.findOneAndUpdate(updatedKoala).then((updatedKoala) => {
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log('error', error);
+        res.sendStatus(500);
+    });
+});
 
 // DELETE route
 
