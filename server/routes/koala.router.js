@@ -58,7 +58,7 @@ router.post('/', (req, res)=>{
 router.put('/', (req, res) => {
     const updatedKoala = req.body;
     // pass the updatedGame into mongo
-    Koala.findOneAndUpdate(updatedKoala).then((updatedKoala) => {
+    Koala.findOneAndUpdate({_id: updatedKoala._id}, updatedKoala).then((updatedKoala) => {
         res.sendStatus(200);
     }).catch((error) => {
         console.log('error', error);
