@@ -7,7 +7,17 @@ import logger from 'redux-logger';
 
 import App from './components/App/App';
 import createSagaMiddleware from 'redux-saga';
-// import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put } from 'redux-saga/effects';
+
+function* addNew(action){
+    try{
+        const serverResponse = yield axios.post('/api/koala',action.payload);
+        const nextAction ={type:'GET_KOALAS', payload:serverResponse.data};
+        yield put(nextAction);
+    }catch(error){
+        console.log(error,'in post New Koala saga');
+    }
+}
 
 function* rootSaga(){
     yield takeEvery('GET_KOALAS', getKoalas)
