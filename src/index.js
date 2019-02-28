@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
-// import axios from 'axios';
+import axios from 'axios';
 
 import App from './components/App/App';
 import createSagaMiddleware from 'redux-saga';
@@ -20,7 +20,9 @@ function* addNew(action){
 }
 
 function* rootSaga(){
-    yield takeEvery('GET_KOALAS', getKoalas)
+    yield takeEvery('GET_KOALAS', getKoalas);
+    yield takeEvery('ADD_KOALAS',addNew );
+
 
 }
 function* getKoalas() {
