@@ -12,7 +12,7 @@ class KoalaTableRow extends Component {
                 <td>{this.props.koala.name}</td>
                 <td>{this.props.koala.gender}</td>
                 <td>{this.props.koala.age}</td>
-                <td>{this.props.koala.ready_to_transfer}</td>
+                <td>{this.props.koala.ready_to_transfer.toString()}</td>
                 <td>{this.props.koala.notes}</td>
                 <td>
                     <button>Transfer</button>
