@@ -28,6 +28,12 @@ class KoalaForm extends Component {
     createKoala = ()=> {
         const action = {type:'ADD_KOALAS', payload: this.state};
         this.props.dispatch(action);
+        this.setState({
+            name: '',
+            gender: '',
+            age: 0,
+            notes: '',
+        })
     }
     
     render() {
